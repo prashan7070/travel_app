@@ -41,12 +41,32 @@ class TravelCard extends StatelessWidget {
             // Image Section
             ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: Image.network(
-                image,
-                height: 160,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+              child: image.startsWith('http')
+                  ? Image.network(
+                      image,
+                      height: 160,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: _buildErrorPlaceholder,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          height: 160,
+                          width: double.infinity,
+                          color: Colors.grey[200],
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      },
+                    )
+                  : Image.asset(
+                      image,
+                      height: 160,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: _buildErrorPlaceholder,
+                    ),
             ),
             // Info Section
             Padding(
@@ -74,6 +94,22 @@ class TravelCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildErrorPlaceholder(BuildContext context, Object error, StackTrace? stackTrace) {
+    return Container(
+      height: 160,
+      width: double.infinity,
+      color: Colors.grey[300],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.broken_image, color: Colors.grey, size: 40),
+          SizedBox(height: 8),
+          Text("Image not available", style: TextStyle(color: Colors.grey, fontSize: 12)),
+        ],
       ),
     );
   }
