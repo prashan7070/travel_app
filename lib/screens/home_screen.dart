@@ -69,14 +69,14 @@ class HomeScreen extends StatelessWidget {
                         width: 240,
                         title: "Sigiriya Rock",
                         location: "Matale, Sri Lanka",
-                        image: "https://images.unsplash.com/photo-1588598116712-42938816c891",
+                        image: "https://images.unsplash.com/photo-1579224168058-299f0e303429?q=80&w=600",
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DetailsScreen())),
                       ),
                       TravelCard(
                         width: 240,
                         title: "Ella Nine Arch",
                         location: "Ella, Sri Lanka",
-                        image: "https://images.unsplash.com/photo-1543731068-7e0f5beff43a",
+                        image: "https://images.unsplash.com/photo-1543731068-7e0f5beff43a?q=80&w=600",
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DetailsScreen())),
                       ),
                     ],
@@ -92,13 +92,13 @@ class HomeScreen extends StatelessWidget {
                 TravelCard(
                   title: "Galle Fort",
                   location: "Galle, Sri Lanka",
-                  image: "https://images.unsplash.com/photo-1625736312933-911e03882772",
+                  image: "https://images.unsplash.com/photo-1625736312933-911e03882772?q=80&w=600",
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DetailsScreen())),
                 ),
                 TravelCard(
                   title: "Temple of Tooth",
                   location: "Kandy, Sri Lanka",
-                  image: "https://images.unsplash.com/photo-1581446450519-724831610e2f",
+                  image: "https://images.unsplash.com/photo-1581446450519-724831610e2f?q=80&w=600",
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DetailsScreen())),
                 ),
                 
