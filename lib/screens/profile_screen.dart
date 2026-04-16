@@ -31,6 +31,23 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Back button (Only shows when pushed from HomeScreen)
+                if (Navigator.canPop(context))
+                  Positioned(
+                    top: 50,
+                    left: 20,
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.3),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
+                      ),
+                    ),
+                  ),
                 // Avatar
                 Positioned(
                   bottom: -50,

@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import '../models/trip_model.dart';
 
-class DetailsScreen extends StatelessWidget {
-  final String title;
-  final String location;
-  final String imagePath;
-  final double rating;
-  final String description;
+class DetailsScreen extends StatefulWidget {
+  final Trip trip;
 
-  const DetailsScreen({
-    super.key,
-    required this.title,
-    required this.location,
-    required this.imagePath,
-    required this.rating,
-    required this.description,
-  });
+  const DetailsScreen({super.key, required this.trip});
 
   @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  @override
   Widget build(BuildContext context) {
+    bool isFav = favoriteTrips.any((element) => element.title == widget.trip.title);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -27,9 +24,9 @@ class DetailsScreen extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            child: imagePath.startsWith('http')
-                ? Image.network(imagePath, height: 350, fit: BoxFit.cover)
-                : Image.asset(imagePath, height: 350, fit: BoxFit.cover),
+            child: widget.trip.imagePath.startsWith('http')
+                ? Image.network(widget.trip.imagePath, height: 350, fit: BoxFit.cover)
+                : Image.asset(widget.trip.imagePath, height: 350, fit: BoxFit.cover),
           ),
           
           // Back Button & Favorite Icon
@@ -51,13 +48,28 @@ class DetailsScreen extends StatelessWidget {
                     child: const Icon(Icons.arrow_back_ios_new, size: 20),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8),
-                    shape: BoxShape.circle,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (isFav) {
+                        favoriteTrips.removeWhere((element) => element.title == widget.trip.title);
+                      } else {
+                        favoriteTrips.add(widget.trip);
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.8),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isFav ? Icons.favorite : Icons.favorite_border,
+                      size: 22,
+                      color: Colors.redAccent,
+                    ),
                   ),
-                  child: const Icon(Icons.favorite_border, size: 22, color: Colors.redAccent),
                 ),
               ],
             ),
@@ -86,7 +98,7 @@ class DetailsScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          title,
+                          widget.trip.title,
                           style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -95,7 +107,7 @@ class DetailsScreen extends StatelessWidget {
                           const Icon(Icons.star, color: Colors.orange, size: 22),
                           const SizedBox(width: 4),
                           Text(
-                            rating.toString(),
+                            widget.trip.rating.toString(),
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -108,7 +120,7 @@ class DetailsScreen extends StatelessWidget {
                       const Icon(Icons.location_on, color: Colors.blueAccent, size: 18),
                       const SizedBox(width: 5),
                       Text(
-                        location,
+                        widget.trip.location,
                         style: const TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w500),
                       ),
                     ],
@@ -122,7 +134,7 @@ class DetailsScreen extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Text(
-                        description,
+                        widget.trip.description,
                         style: const TextStyle(fontSize: 15, color: Colors.black54, height: 1.5),
                         textAlign: TextAlign.justify,
                       ),

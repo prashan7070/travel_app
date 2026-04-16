@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import '../widgets/travel_card.dart'; 
 import 'details_screen.dart';
+import '../models/trip_model.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
 
+  @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +23,7 @@ class FavoritesScreen extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 10), 
               child: Text(
                 "My Favorites",
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold), // Font size update
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold), 
               ),
             ),
             const SizedBox(height: 10), 
@@ -25,46 +31,35 @@ class FavoritesScreen extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20), 
-                child: ListView(
-                  children: [
-                    
-                    TravelCard(
-                      title: "Blue Beach",
-                      location: "Galle, Sri Lanka",
-                      image: "assets/images/beach.png", 
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const DetailsScreen(
-                            title: "Blue Beach",
-                            location: "Galle, Sri Lanka",
-                            imagePath: "assets/images/beach.png",
-                            rating: 4.5,
-                            description: "A gorgeous, secluded beach strip on the southern coast. Enjoy quiet sunbathing and fresh seafood while exploring the local reef structures around the coast.",
-                          )),
-                        );
-                      },
-                    ),
-                    TravelCard(
-                      title: "Tea Gardens",
-                      location: "Nuwara Eliya, Sri Lanka",
-                      image: "assets/images/tea_garden.png", 
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const DetailsScreen(
-                            title: "Tea Gardens",
-                            location: "Nuwara Eliya, Sri Lanka",
-                            imagePath: "assets/images/tea_garden.png",
-                            rating: 4.8,
-                            description: "Breathtaking landscapes filled with lush green tea plantations. The chilly climate and misty mountains perfectly match a warm cup of pure Ceylon tea.",
-                          )),
-                        );
-                      },
-                    ),
-                    
-                  ],
-                ),
+                child: favoriteTrips.isEmpty
+                    ? const Center(
+                        child: Text(
+                          "No favorites yet. Start exploring!",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: favoriteTrips.length,
+                        itemBuilder: (context, index) {
+                          final trip = favoriteTrips[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: TravelCard(
+                              title: trip.title,
+                              location: trip.location,
+                              image: trip.imagePath,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(trip: trip),
+                                  ),
+                                ).then((_) => setState(() {}));
+                              },
+                            ),
+                          );
+                        },
+                      ),
               ),
             ),
           ],
