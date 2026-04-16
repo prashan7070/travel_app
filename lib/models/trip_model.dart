@@ -14,5 +14,5 @@ class Trip {
   });
 }
 
-// Global list to store our favorite trips without needing a provider
+// Global list to store favorite trips
 List<Trip> favoriteTrips = [];

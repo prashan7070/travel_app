@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/circular_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -36,16 +37,11 @@ class ProfileScreen extends StatelessWidget {
                   Positioned(
                     top: 50,
                     left: 20,
-                    child: GestureDetector(
+                    child: CircularButton(
+                      icon: Icons.arrow_back_ios_new,
+                      iconColor: Colors.white,
+                      backgroundColor: Colors.white.withValues(alpha: 0.3),
                       onTap: () => Navigator.pop(context),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
-                      ),
                     ),
                   ),
                 // Avatar

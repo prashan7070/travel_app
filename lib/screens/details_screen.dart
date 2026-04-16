@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/trip_model.dart';
+import '../widgets/circular_button.dart';
 
 class DetailsScreen extends StatefulWidget {
   final Trip trip;
@@ -37,18 +38,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
+                CircularButton(
+                  icon: Icons.arrow_back_ios_new,
+                  iconSize: 20,
+                  iconColor: Colors.black,
+                  backgroundColor: Colors.white.withValues(alpha: 0.8),
                   onTap: () => Navigator.pop(context),
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.arrow_back_ios_new, size: 20),
-                  ),
                 ),
-                GestureDetector(
+                CircularButton(
+                  icon: isFav ? Icons.favorite : Icons.favorite_border,
+                  iconSize: 22,
+                  iconColor: Colors.redAccent,
+                  backgroundColor: Colors.white.withValues(alpha: 0.8),
                   onTap: () {
                     setState(() {
                       if (isFav) {
@@ -58,18 +59,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       }
                     });
                   },
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      isFav ? Icons.favorite : Icons.favorite_border,
-                      size: 22,
-                      color: Colors.redAccent,
-                    ),
-                  ),
                 ),
               ],
             ),
