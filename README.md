@@ -12,7 +12,7 @@ A beautiful, interactive Flutter application designed to help users discover and
 
 ## 📱 Screenshots
 
-*(Add screenshots of your app here once pushed to GitHub: e.g. `![Home](docs/home.png)`)*
+**
 
 | Home Screen | Details Screen | Favorites Screen |
 | :---: | :---: | :---: |
