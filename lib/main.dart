@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/splash_screen.dart';
 import 'widgets/custom_bottom_nav.dart';
 
 void main() => runApp(const TravelApp());
@@ -17,7 +18,7 @@ class TravelApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MainLayout(),
+      home: const SplashScreen(),
     );
   }
 }
